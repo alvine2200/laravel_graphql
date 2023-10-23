@@ -43,9 +43,15 @@
 #     updated_at: DateTime!
 # }
 
+# user querying all and a single user query, then trying out paginate
 type Query {
     user(id: ID @eq): User @find
-    users: [User!]! @all
+    paginate_users: [User!]! @paginate
+    all_users: [User!]! @all
+}
+
+type Mutation {
+    createUser(name: String!, email: String!, password: String!): User! @create
 }
 
 type User {
