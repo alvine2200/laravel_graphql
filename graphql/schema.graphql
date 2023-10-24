@@ -85,6 +85,6 @@ type Post {
     id: ID!
     text: String!
     description: String!
-    user_id: String!
+    author: User! @belongTo
     created_at: String!
 }
