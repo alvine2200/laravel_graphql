@@ -45,12 +45,19 @@
 
 # user querying all and a single user query, then trying out paginate
 type Query {
-    user(id: ID @eq): User @find
-    paginate_users: [User!]! @paginate
+    #user models queries
     all_users: [User!]! @all
+    paginate_users: [User!]! @paginate
+    single_user(id: ID @eq): User @find
+
+    #posts mdel queries
+    all_posts: [Post!]! @all
+    paginate_posts: [Post!]! @paginate
+    single_post(id: ID @eq): Post @find
 }
 
 type Mutation {
+    #user miutations
     createUser(name: String!, email: String!, password: String!): User! @create
     updateUser(id: ID!, name: String!, email: String!): User! @update
     deleteUser(id: ID! @where(field: "id")): User! @delete
@@ -60,6 +67,10 @@ type Mutation {
         email: String!
         password: String!
     ): User! @upsert
+
+    #posts mutations
+    createPost(text: String!, description: String!, user_id: String!): Post!
+        @create
 }
 
 type User {
@@ -67,5 +78,13 @@ type User {
     name: String!
     email: String!
     email_verified_at: String!
+    created_at: String!
+}
+
+type Post {
+    id: ID!
+    text: String!
+    description: String!
+    user_id: String!
     created_at: String!
 }
