@@ -21,6 +21,6 @@ final readonly class Login
             ]);
         }
 
-        return $user->createToken("Web123@-yq54%")->plainTextToken; 
+        return $user->createToken("Web123@-yq54%")->plainTextToken;
     }
 }

@@ -18,7 +18,6 @@ return [
     'routes' => [
         '/graphiql' => [
             'name' => 'graphiql',
-            // 'middleware' => ['web']
             // 'prefix' => '',
             // 'domain' => 'graphql.' . env('APP_DOMAIN', 'localhost'),
 
@@ -49,7 +48,12 @@ return [
 
             'subscription-endpoint' => env('GRAPHIQL_SUBSCRIPTION_ENDPOINT', null),
         ],
+        'middleware' => [
+            \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+        ],
     ],
+
+    'guards' => ['sanctum'],
 
     /*
     |--------------------------------------------------------------------------
