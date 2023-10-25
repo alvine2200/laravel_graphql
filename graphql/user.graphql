@@ -1,0 +1,33 @@
+extend type Query {
+    #user models queries
+    all_users: [User!]! @all
+    paginate_users: [User!]! @paginate
+    single_user(id: ID @eq): User @find
+}
+
+type Mutation {
+    #user miutations
+    createUser(
+        name: String! @rules(apply: ["required", "string"])
+        email: String!
+            @rules(apply: ["email:filter", "required", "unique:users,email"])
+        password: String! @rules(apply: ["min:5", "required", "string"])
+    ): User! @create
+    updateUser(id: ID!, name: String!, email: String!): User! @update
+    deleteUser(id: ID! @where(field: "id")): User! @delete
+    upsertUser(
+        id: ID!
+        name: String!
+        email: String!
+        password: String!
+    ): User! @upsert
+}
+
+type User {
+    id: ID!
+    name: String!
+    email: String!
+    email_verified_at: String!
+    created_at: String!
+    posts: [Post]! @hasMany
+}

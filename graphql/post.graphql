@@ -1,0 +1,20 @@
+extend type Query {
+    #posts mdel queries
+    all_posts: [Post!]! @all
+    paginate_posts: [Post!]! @paginate
+    single_post(id: ID @eq): Post @find
+}
+
+type Mutation {
+    #posts mutations
+    createPost(text: String!, description: String!, user_id: String!): Post!
+        @create
+}
+
+type Post {
+    id: ID!
+    text: String!
+    description: String!
+    author: User! @belongsTo
+    created_at: String!
+}
